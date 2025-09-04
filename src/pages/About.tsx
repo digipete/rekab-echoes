@@ -20,52 +20,52 @@ const About = () => {
 
   const timeline = [
     {
-      year: "1975",
-      event: "Born in Portland, Oregon",
-      description: "James enters the world during a vibrant era of musical innovation"
-    },
-    {
-      year: "1993",
-      event: "First Album Release",
-      description: "Released his debut album 'Emerging Sounds' at age 18"
-    },
-    {
-      year: "2000",
-      event: "Adopted ReKaB Moniker",
-      description: "Began performing and recording under the artistic name ReKaB"
-    },
-    {
-      year: "2010",
-      event: "Grammy Nomination",
-      description: "Nominated for Best New Age Album for 'Temporal Landscapes'"
-    },
-    {
       year: "2018",
-      event: "Major Retrospective",
-      description: "Released '25 Years of Sound' career-spanning collection"
+      event: "First Release",
+      description: "Debut release establishing the ReKaB sound signature"
+    },
+    {
+      year: "2019",
+      event: "My Reflections",
+      description: "Sophomore release exploring introspective electronic themes"
+    },
+    {
+      year: "2020",
+      event: "Subtle Beginnings",
+      description: "Ambient techno album released on independent label"
+    },
+    {
+      year: "2021",
+      event: "Lost In Wires",
+      description: "Breakthrough release showcasing refined production techniques"
+    },
+    {
+      year: "2022",
+      event: "Label Partnerships",
+      description: "Collaborations with Móatún 7, Yore Records, and Acquit Records"
     },
     {
       year: "2023",
-      event: "Final Recording",
-      description: "Completed his last studio album 'Eternal Echoes' shortly before passing"
+      event: "Controlling Science",
+      description: "Latest release pushing boundaries of experimental electronic music"
     }
   ];
 
   const achievements = [
     {
       icon: Award,
-      title: "Grammy Nominated",
-      description: "Best New Age Album (2010)"
+      title: "Label Releases",
+      description: "Móatún 7, Yore Records, Acquit Records"
     },
     {
       icon: Music,
-      title: "15 Studio Albums",
-      description: "Spanning over 30 years"
+      title: "Genre Innovation",
+      description: "Ambient Techno & Soulful Electro"
     },
     {
       icon: Heart,
-      title: "Charitable Work",
-      description: "Music therapy programs"
+      title: "UK Based",
+      description: "Creating from Bridport, UK"
     }
   ];
 
@@ -81,11 +81,11 @@ const About = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="font-display text-4xl lg:text-5xl font-bold text-primary mb-4">
-              About James Baker
+              About ReKaB
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A life dedicated to musical expression and the exploration of sound as a 
-              medium for emotional connection and healing.
+              An electronic music artist from Bridport, UK, creating ambient techno, 
+              soulful electro, and experimental soundscapes.
             </p>
           </div>
 
@@ -95,7 +95,7 @@ const About = () => {
               <div className="relative">
                 <img 
                   src={jamesBakerPortrait}
-                  alt="James Baker (ReKaB)"
+                  alt="ReKaB - Electronic Music Artist"
                   className="w-full rounded-2xl shadow-soft"
                 />
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/20 to-transparent" />
@@ -110,31 +110,31 @@ const About = () => {
             >
               <motion.div variants={fadeInUp}>
                 <h2 className="font-display text-2xl font-semibold text-primary mb-4">
-                  The Artist Behind ReKaB
+                  Electronic Music Pioneer
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  James Baker, known professionally as ReKaB, was a pioneering composer and sound artist 
-                  whose work transcended traditional genre boundaries. Born in Portland, Oregon in 1975, 
-                  James discovered his passion for music at an early age, finding solace and expression 
-                  through sound during challenging times.
+                  ReKaB is an innovative electronic music artist based in Bridport, UK, known for 
+                  crafting immersive soundscapes that blend ambient techno with soulful electronica. 
+                  Working with respected labels including Móatún 7, Yore Records, and Acquit Records, 
+                  ReKaB has established a distinctive voice in the electronic music landscape.
                 </p>
               </motion.div>
 
               <motion.div variants={fadeInUp}>
                 <p className="text-muted-foreground leading-relaxed">
-                  His artistic journey was marked by continuous experimentation with electronic and 
-                  acoustic elements, creating atmospheric soundscapes that spoke to the human condition. 
-                  The name "ReKaB" - his surname spelled backwards - represented his philosophy of 
-                  looking at familiar things from new perspectives.
+                  The project explores the intersection of technological innovation and human emotion, 
+                  creating atmospheric compositions that range from deep, meditative ambient pieces 
+                  to driving techno rhythms. Each release showcases a meticulous attention to texture 
+                  and space, building sonic environments that transport listeners to otherworldly realms.
                 </p>
               </motion.div>
 
               <motion.div variants={fadeInUp}>
                 <p className="text-muted-foreground leading-relaxed">
-                  Beyond his recording career, James was deeply committed to music therapy and worked 
-                  with hospitals and care facilities, using his gift to bring comfort to those in need. 
-                  His legacy lives on through his extensive catalog and the countless lives he touched 
-                  through his compassionate approach to music.
+                  With releases like "Lost In Wires," "Subtle Beginnings," and "Controlling Science," 
+                  ReKaB continues to push boundaries within electronic music, combining analog warmth 
+                  with digital precision to create works that are both intellectually engaging and 
+                  deeply emotional.
                 </p>
               </motion.div>
             </motion.div>
@@ -149,7 +149,7 @@ const About = () => {
             className="mb-16"
           >
             <h2 className="font-display text-3xl font-semibold text-primary text-center mb-8">
-              Achievements & Recognition
+              Releases & Recognition
             </h2>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -185,7 +185,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-display text-3xl font-semibold text-primary text-center mb-12">
-              Life Timeline
+              Release Timeline
             </h2>
 
             <div className="relative">

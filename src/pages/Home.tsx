@@ -21,9 +21,9 @@ const Home = () => {
   };
 
   const featuredTracks = [
-    { title: "Morning Reflections", year: "2018", duration: "4:32" },
-    { title: "Echoes of Time", year: "2020", duration: "6:15" },
-    { title: "Gentle Waves", year: "2019", duration: "3:48" },
+    { title: "Lost In Wires", year: "2021", duration: "5:47" },
+    { title: "Subtle Beginnings", year: "2020", duration: "7:23" },
+    { title: "My Reflections", year: "2019", duration: "6:18" },
   ];
 
   return (
@@ -45,7 +45,7 @@ const Home = () => {
                 <div className="relative">
                   <img 
                     src={jamesBakerPortrait}
-                    alt="James Baker (ReKaB) - Memorial Portrait"
+                    alt="ReKaB - Electronic Music Artist"
                     className="w-full max-w-md mx-auto rounded-2xl shadow-green"
                   />
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/30 to-transparent" />
@@ -63,9 +63,8 @@ const Home = () => {
                   className="font-display text-4xl lg:text-6xl font-bold mb-4"
                   variants={fadeInUp}
                 >
-                  In Memory of
-                  <span className="block text-accent">James Baker</span>
-                  <span className="block text-2xl lg:text-3xl mt-2 opacity-90">(ReKaB)</span>
+                  <span className="block text-accent">ReKaB</span>
+                  <span className="block text-2xl lg:text-3xl mt-2 opacity-90">Electronic Music Artist</span>
                 </motion.h1>
                 
                 <motion.div 
@@ -73,15 +72,15 @@ const Home = () => {
                   variants={fadeInUp}
                 >
                   <Calendar className="w-5 h-5" />
-                  <span>1975 - 2023</span>
+                  <span>Bridport, UK</span>
                 </motion.div>
 
                 <motion.p 
                   className="text-lg lg:text-xl mb-8 leading-relaxed opacity-90 max-w-lg"
                   variants={fadeInUp}
                 >
-                  A visionary artist whose musical creations touched hearts and minds. 
-                  His legacy lives on through the sounds and memories he gifted to the world.
+                  Creating ambient techno, soulful electro, and experimental electronic music through 
+                  labels like Móatún 7, Yore Records, and Acquit Records.
                 </motion.p>
 
                 <motion.div 
@@ -94,12 +93,12 @@ const Home = () => {
                       Listen to the Music
                     </Button>
                   </Link>
-                  <Link to="/tributes">
+                  <a href="https://rekab.bandcamp.com/" target="_blank" rel="noopener noreferrer">
                     <Button size="lg" variant="outline" className="border-foreground/20 text-foreground bg-background/10 hover:bg-foreground hover:text-background backdrop-blur-sm">
                       <Heart className="w-5 h-5 mr-2" />
-                      Share a Tribute
+                      Visit Bandcamp
                     </Button>
-                  </Link>
+                  </a>
                 </motion.div>
               </motion.div>
             </div>
@@ -122,7 +121,7 @@ const Home = () => {
                 Featured Works
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Explore some of James's most beloved musical pieces and photographic moments
+                Explore ReKaB's electronic music catalog and creative journey
               </p>
             </motion.div>
 
