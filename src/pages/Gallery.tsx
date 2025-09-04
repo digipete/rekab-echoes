@@ -7,6 +7,7 @@ import { Image as ImageIcon, ZoomIn, Filter, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRole } from "@/hooks/useUserRole";
 
 interface GalleryImage {
   id: string;
@@ -27,6 +28,7 @@ const Gallery = () => {
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
+  const { isAdmin } = useUserRole();
 
   useEffect(() => {
     fetchImages();
@@ -175,8 +177,8 @@ const Gallery = () => {
               </Button>
             ))}
             
-            {/* Upload Button - Only show for authenticated users */}
-            {user && (
+            {/* Upload Button - Only show for admin users */}
+            {user && isAdmin && (
               <div className="relative ml-2">
                 <input
                   type="file"
