@@ -8,60 +8,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Memorial Site Design System for James Baker (ReKaB) - Techno Producer
-   Palette: Industrial dark, concrete grey, electric blue accent, warm steel
+/* Beatport-inspired Design System for James Baker (ReKaB) - Techno Producer
+   Palette: Deep black, electric green, vibrant purple/pink, bright white
    Typography: Playfair Display (headings), Inter (body)
-   Aesthetic: Beautiful yet rugged industrial - honoring a techno artist
+   Aesthetic: Dark electronic club aesthetic - inspired by Beatport
    All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* Industrial memorial palette - beautiful yet rugged */
-    --background: 220 15% 96%; /* Concrete light */
-    --foreground: 220 25% 8%; /* Deep charcoal */
+    /* Beatport-inspired dark electronic palette */
+    --background: 0 0% 98%; /* Light mode fallback */
+    --foreground: 0 0% 5%; /* Almost black text */
 
-    --card: 220 20% 98%;
-    --card-foreground: 220 25% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
 
-    --popover: 220 20% 98%;
-    --popover-foreground: 220 25% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 5%;
 
-    --primary: 220 30% 12%; /* Industrial dark */
-    --primary-foreground: 220 15% 96%;
+    --primary: 0 0% 5%; /* Deep black */
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 15% 88%; /* Steel grey */
-    --secondary-foreground: 220 25% 8%;
+    --secondary: 0 0% 90%; /* Light grey */
+    --secondary-foreground: 0 0% 5%;
 
-    --muted: 220 10% 92%; /* Light concrete */
-    --muted-foreground: 220 15% 40%;
+    --muted: 0 0% 95%; /* Very light grey */
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 200 85% 55%; /* Electric blue accent */
-    --accent-foreground: 220 25% 8%;
+    --accent: 120 100% 50%; /* Electric green */
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 65% 50%;
-    --destructive-foreground: 220 15% 96%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 20% 85%;
-    --input: 220 20% 88%;
-    --ring: 200 85% 55%; /* Electric blue focus ring */
+    --border: 0 0% 88%;
+    --input: 0 0% 90%;
+    --ring: 120 100% 50%; /* Electric green focus ring */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Industrial-specific tokens */
-    --industrial-blue: 200 85% 55%;
-    --industrial-dark: 220 30% 12%;
-    --industrial-steel: 220 15% 88%;
-    --industrial-concrete: 220 10% 92%;
+    /* Beatport-specific tokens */
+    --beatport-green: 120 100% 50%;
+    --beatport-black: 0 0% 5%;
+    --beatport-purple: 270 100% 70%;
+    --beatport-pink: 330 100% 75%;
     
-    /* Industrial gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--industrial-dark)), hsl(220 25% 18%));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(220 15% 94%));
+    /* Beatport gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 8%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 96%));
+    --gradient-purple: linear-gradient(135deg, hsl(var(--beatport-purple)), hsl(var(--beatport-pink)));
     
-    /* Industrial shadows */
-    --shadow-soft: 0 2px 20px -5px hsl(220 25% 8% / 0.15);
-    --shadow-electric: 0 4px 25px -8px hsl(var(--industrial-blue) / 0.4);
-    --shadow-industrial: 0 8px 32px -12px hsl(220 30% 12% / 0.3);
+    /* Beatport shadows */
+    --shadow-soft: 0 2px 20px -5px hsl(0 0% 0% / 0.15);
+    --shadow-green: 0 4px 25px -8px hsl(var(--beatport-green) / 0.4);
+    --shadow-club: 0 8px 32px -12px hsl(0 0% 0% / 0.3);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -85,49 +86,50 @@
   }
 
   .dark {
-    /* Dark industrial theme - deeper, more rugged */
-    --background: 220 25% 6%; /* Deep industrial dark */
-    --foreground: 220 15% 92%; /* Light concrete text */
+    /* Beatport-inspired dark theme - true club aesthetic */
+    --background: 0 0% 3%; /* Deep black background */
+    --foreground: 0 0% 98%; /* Bright white text */
 
-    --card: 220 20% 8%;
-    --card-foreground: 220 15% 92%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 8%;
-    --popover-foreground: 220 15% 92%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 220 15% 92%; /* Light concrete primary in dark */
-    --primary-foreground: 220 25% 6%;
+    --primary: 0 0% 98%; /* White primary in dark */
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 220 15% 15%; /* Dark steel */
-    --secondary-foreground: 220 15% 92%;
+    --secondary: 0 0% 12%; /* Dark grey */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 12% 12%;
-    --muted-foreground: 220 10% 65%;
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 200 85% 60%; /* Brighter electric blue in dark */
-    --accent-foreground: 220 25% 6%;
+    --accent: 120 100% 50%; /* Electric green */
+    --accent-foreground: 0 0% 3%;
 
     --destructive: 0 65% 55%;
-    --destructive-foreground: 220 15% 92%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 15%;
-    --input: 220 15% 15%;
-    --ring: 200 85% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 120 100% 50%;
 
-    /* Industrial dark tokens */
-    --industrial-blue: 200 85% 60%;
-    --industrial-dark: 220 25% 6%;
-    --industrial-steel: 220 15% 15%;
-    --industrial-concrete: 220 15% 92%;
+    /* Beatport dark tokens */
+    --beatport-green: 120 100% 50%;
+    --beatport-black: 0 0% 3%;
+    --beatport-purple: 270 100% 65%;
+    --beatport-pink: 330 100% 70%;
     
-    /* Dark industrial gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--industrial-dark)), hsl(220 20% 10%));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(220 18% 10%));
+    /* Dark Beatport gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 8%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 8%));
+    --gradient-purple: linear-gradient(135deg, hsl(var(--beatport-purple)), hsl(var(--beatport-pink)));
     
-    /* Dark industrial shadows */
-    --shadow-soft: 0 2px 20px -5px hsl(0 0% 0% / 0.4);
-    --shadow-electric: 0 4px 25px -8px hsl(var(--industrial-blue) / 0.3);
-    --shadow-industrial: 0 8px 32px -12px hsl(0 0% 0% / 0.6);
+    /* Dark Beatport shadows */
+    --shadow-soft: 0 2px 20px -5px hsl(0 0% 0% / 0.6);
+    --shadow-green: 0 4px 25px -8px hsl(var(--beatport-green) / 0.5);
+    --shadow-club: 0 8px 32px -12px hsl(0 0% 0% / 0.8);
   }
 }
 
@@ -164,8 +166,8 @@
 }
 
 @layer components {
-  /* Industrial-specific component styles */
-  .industrial-gradient {
+  /* Beatport-specific component styles */
+  .beatport-gradient {
     background: var(--gradient-hero);
   }
 
@@ -173,16 +175,20 @@
     background: var(--gradient-card);
   }
 
+  .purple-gradient {
+    background: var(--gradient-purple);
+  }
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
 
-  .shadow-electric {
-    box-shadow: var(--shadow-electric);
+  .shadow-green {
+    box-shadow: var(--shadow-green);
   }
 
-  .shadow-industrial {
-    box-shadow: var(--shadow-industrial);
+  .shadow-club {
+    box-shadow: var(--shadow-club);
   }
 
   .transition-smooth {

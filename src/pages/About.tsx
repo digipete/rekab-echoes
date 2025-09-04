@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Music, Heart, Award } from "lucide-react";
-import jamesBakerPortrait from "@/assets/james-baker-portrait.jpg";
+const jamesBakerPortrait = "/lovable-uploads/7d4eee25-01e9-44a4-8c4b-89d42abf6449.png";
 
 const About = () => {
   const fadeInUp = {

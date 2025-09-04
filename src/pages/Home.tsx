@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden memorial-gradient text-primary-foreground py-20 lg:py-32">
+      <section className="relative overflow-hidden beatport-gradient text-primary-foreground py-20 lg:py-32">
         <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent" />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -46,7 +46,7 @@ const Home = () => {
                   <img 
                     src={jamesBakerPortrait}
                     alt="James Baker (ReKaB) - Memorial Portrait"
-                    className="w-full max-w-md mx-auto rounded-2xl shadow-electric"
+                    className="w-full max-w-md mx-auto rounded-2xl shadow-green"
                   />
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/30 to-transparent" />
                 </div>

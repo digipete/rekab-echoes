@@ -56,11 +56,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				industrial: {
-					blue: 'hsl(var(--industrial-blue))',
-					dark: 'hsl(var(--industrial-dark))',
-					steel: 'hsl(var(--industrial-steel))',
-					concrete: 'hsl(var(--industrial-concrete))'
+				beatport: {
+					green: 'hsl(var(--beatport-green))',
+					black: 'hsl(var(--beatport-black))',
+					purple: 'hsl(var(--beatport-purple))',
+					pink: 'hsl(var(--beatport-pink))'
 				}
 			},
 			borderRadius: {
