@@ -295,20 +295,6 @@ const Music = () => {
                         <div className="flex flex-col gap-4">
                           {/* Header Row */}
                           <div className="flex items-center gap-6">
-                            {/* Play Button */}
-                            <Button
-                              variant="outline"
-                              size="icon"
-                              className="flex-shrink-0 w-12 h-12 rounded-full"
-                              onClick={() => handlePlayPause(track.id)}
-                            >
-                              {isPlaying === track.id ? (
-                                <Pause className="w-5 h-5" />
-                              ) : (
-                                <Play className="w-5 h-5 ml-0.5" />
-                              )}
-                            </Button>
-
                             {/* Track Info */}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start justify-between gap-4">
