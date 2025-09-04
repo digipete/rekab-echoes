@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      gallery_images: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          file_path: string
+          file_size: number | null
+          id: string
+          title: string
+          updated_at: string
+          year: number | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          file_path: string
+          file_size?: number | null
+          id?: string
+          title: string
+          updated_at?: string
+          year?: number | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          title?: string
+          updated_at?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
+      music_tracks: {
+        Row: {
+          artist: string
+          created_at: string
+          description: string | null
+          duration: string | null
+          file_path: string
+          file_size: number | null
+          genre: string | null
+          id: string
+          title: string
+          updated_at: string
+          year: number | null
+        }
+        Insert: {
+          artist: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          file_path: string
+          file_size?: number | null
+          genre?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+          year?: number | null
+        }
+        Update: {
+          artist?: string
+          created_at?: string
+          description?: string | null
+          duration?: string | null
+          file_path?: string
+          file_size?: number | null
+          genre?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

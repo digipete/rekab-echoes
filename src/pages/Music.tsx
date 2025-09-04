@@ -1,68 +1,133 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Play, Pause, Search, Filter } from "lucide-react";
+import { Play, Pause, Search, Filter, Upload } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+
+interface Track {
+  id: string;
+  title: string;
+  artist: string;
+  year: number;
+  duration: string;
+  genre: string;
+  description: string;
+  file_path: string;
+  file_size: number;
+}
 
 const Music = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
-  const [isPlaying, setIsPlaying] = useState<number | null>(null);
+  const [isPlaying, setIsPlaying] = useState<string | null>(null);
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
 
-  const genres = ["All", "Ambient", "Classical", "Electronic", "Folk", "Jazz"];
-  
-  const tracks = [
-    {
-      id: 1,
-      title: "Morning Reflections",
-      year: 2018,
-      duration: "4:32",
-      genre: "Ambient",
-      description: "A gentle piece inspired by early morning tranquility"
-    },
-    {
-      id: 2,
-      title: "Echoes of Time",
-      year: 2020,
-      duration: "6:15",
-      genre: "Classical",
-      description: "An orchestral composition exploring themes of memory"
-    },
-    {
-      id: 3,
-      title: "Gentle Waves",
-      year: 2019,
-      duration: "3:48",
-      genre: "Ambient",
-      description: "Soothing sounds reminiscent of ocean waves"
-    },
-    {
-      id: 4,
-      title: "Digital Dreams",
-      year: 2021,
-      duration: "5:23",
-      genre: "Electronic",
-      description: "A synthesized journey through technological landscapes"
-    },
-    {
-      id: 5,
-      title: "Autumn Leaves",
-      year: 2017,
-      duration: "4:01",
-      genre: "Folk",
-      description: "Acoustic guitar piece capturing the essence of fall"
-    },
-    {
-      id: 6,
-      title: "Midnight Jazz",
-      year: 2022,
-      duration: "7:12",
-      genre: "Jazz",
-      description: "Smooth jazz improvisation recorded late at night"
+  useEffect(() => {
+    fetchTracks();
+  }, []);
+
+  const fetchTracks = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('music_tracks')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      setTracks(data || []);
+      
+      // Extract unique genres
+      const uniqueGenres = [...new Set(data?.map(track => track.genre).filter(Boolean))];
+      setGenres(['All', ...uniqueGenres]);
+    } catch (error) {
+      console.error('Error fetching tracks:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load music tracks",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Check if it's an audio file
+    if (!file.type.startsWith('audio/')) {
+      toast({
+        title: "Invalid file type",
+        description: "Please select an audio file",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      // Upload file to storage
+      const fileName = `music/${Date.now()}-${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from('ReKaB')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      // Get basic metadata from filename (you can enhance this)
+      const title = file.name.replace(/\.[^/.]+$/, "");
+      
+      // Insert track metadata into database
+      const { error: dbError } = await supabase
+        .from('music_tracks')
+        .insert({
+          title,
+          artist: "James Baker",
+          file_path: fileName,
+          file_size: file.size,
+          duration: "0:00", // You can implement audio duration detection
+          genre: "Uploaded",
+          description: "Uploaded track",
+        });
+
+      if (dbError) throw dbError;
+
+      toast({
+        title: "Success",
+        description: "Music track uploaded successfully",
+      });
+
+      // Refresh tracks
+      fetchTracks();
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload music track",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+      // Reset file input
+      event.target.value = '';
+    }
+  };
+
+  const getAudioUrl = (filePath: string) => {
+    const { data } = supabase.storage.from('ReKaB').getPublicUrl(filePath);
+    return data.publicUrl;
+  };
 
   const filteredTracks = tracks.filter(track => {
     const matchesSearch = track.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -71,7 +136,7 @@ const Music = () => {
     return matchesSearch && matchesGenre;
   });
 
-  const handlePlayPause = (trackId: number) => {
+  const handlePlayPause = (trackId: string) => {
     setIsPlaying(isPlaying === trackId ? null : trackId);
   };
 
@@ -95,7 +160,7 @@ const Music = () => {
             </p>
           </div>
 
-          {/* Search and Filters */}
+          {/* Search, Filters, and Upload */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -123,97 +188,125 @@ const Music = () => {
                   </Button>
                 ))}
               </div>
+              
+              {/* Upload Button */}
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={handleFileUpload}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  disabled={uploading}
+                />
+                <Button variant="outline" size="sm" disabled={uploading}>
+                  <Upload className="w-4 h-4 mr-1" />
+                  {uploading ? "Uploading..." : "Upload"}
+                </Button>
+              </div>
             </div>
           </div>
 
-          {/* Tracks Grid */}
-          <div className="grid gap-6">
-            {filteredTracks.map((track, index) => (
-              <motion.div
-                key={track.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <Card className="card-gradient shadow-soft hover:shadow-green transition-smooth">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-6">
-                      {/* Play Button */}
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="flex-shrink-0 w-12 h-12 rounded-full"
-                        onClick={() => handlePlayPause(track.id)}
-                      >
-                        {isPlaying === track.id ? (
-                          <Pause className="w-5 h-5" />
-                        ) : (
-                          <Play className="w-5 h-5 ml-0.5" />
-                        )}
-                      </Button>
+          {/* Loading State */}
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading music tracks...</p>
+            </div>
+          ) : (
+            <>
+              {/* Tracks Grid */}
+              <div className="grid gap-6">
+                {filteredTracks.map((track, index) => (
+                  <motion.div
+                    key={track.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                  >
+                    <Card className="card-gradient shadow-soft hover:shadow-green transition-smooth">
+                      <CardContent className="p-6">
+                        <div className="flex flex-col gap-4">
+                          {/* Header Row */}
+                          <div className="flex items-center gap-6">
+                            {/* Play Button */}
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="flex-shrink-0 w-12 h-12 rounded-full"
+                              onClick={() => handlePlayPause(track.id)}
+                            >
+                              {isPlaying === track.id ? (
+                                <Pause className="w-5 h-5" />
+                              ) : (
+                                <Play className="w-5 h-5 ml-0.5" />
+                              )}
+                            </Button>
 
-                      {/* Track Info */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <h3 className="font-display text-xl font-semibold text-primary mb-1 truncate">
-                              {track.title}
-                            </h3>
-                            <p className="text-muted-foreground text-sm mb-2 line-clamp-2">
-                              {track.description}
-                            </p>
-                            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                              <span>{track.year}</span>
-                              <span>•</span>
-                              <span>{track.duration}</span>
+                            {/* Track Info */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1 min-w-0">
+                                  <h3 className="font-display text-xl font-semibold text-primary mb-1 truncate">
+                                    {track.title}
+                                  </h3>
+                                  <p className="text-muted-foreground text-sm mb-2 line-clamp-2">
+                                    {track.description}
+                                  </p>
+                                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                    <span>{track.artist}</span>
+                                    {track.year && (
+                                      <>
+                                        <span>•</span>
+                                        <span>{track.year}</span>
+                                      </>
+                                    )}
+                                    <span>•</span>
+                                    <span>{track.duration}</span>
+                                  </div>
+                                </div>
+                                
+                                <div className="flex-shrink-0">
+                                  <Badge variant="secondary" className="bg-accent/10 text-accent">
+                                    {track.genre}
+                                  </Badge>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           
-                          <div className="flex-shrink-0">
-                            <Badge variant="secondary" className="bg-accent/10 text-accent">
-                              {track.genre}
-                            </Badge>
-                          </div>
+                          {/* Audio Player */}
+                          {track.file_path && (
+                            <audio 
+                              controls 
+                              className="w-full"
+                              src={getAudioUrl(track.file_path)}
+                              preload="metadata"
+                            >
+                              Your browser does not support the audio element.
+                            </audio>
+                          )}
                         </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
 
-          {filteredTracks.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-muted-foreground text-lg">
-                No tracks found matching your search criteria.
-              </p>
-            </motion.div>
+              {filteredTracks.length === 0 && !loading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-12"
+                >
+                  <p className="text-muted-foreground text-lg">
+                    {tracks.length === 0 
+                      ? "No music tracks uploaded yet. Use the upload button to add tracks."
+                      : "No tracks found matching your search criteria."
+                    }
+                  </p>
+                </motion.div>
+              )}
+            </>
           )}
-
-          {/* Note about Supabase integration */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-16 text-center"
-          >
-            <Card className="card-gradient shadow-soft max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="font-display text-xl font-semibold text-primary mb-3">
-                  Audio Streaming Coming Soon
-                </h3>
-                <p className="text-muted-foreground">
-                  Full audio streaming capabilities will be available once connected to Supabase, 
-                  allowing you to upload, store, and stream James's complete musical collection.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
         </motion.div>
       </div>
     </div>

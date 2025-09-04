@@ -1,86 +1,142 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Image as ImageIcon, ZoomIn, Filter } from "lucide-react";
+import { Image as ImageIcon, ZoomIn, Filter, Upload } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+
+interface GalleryImage {
+  id: string;
+  title: string;
+  category: string;
+  year: number;
+  description: string;
+  file_path: string;
+  file_size: number;
+}
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const { toast } = useToast();
 
-  const categories = ["All", "Portraits", "Studio", "Live", "Nature", "Abstract"];
-  
-  const images = [
-    {
-      id: 1,
-      title: "Studio Session 2020",
-      category: "Studio",
-      year: 2020,
-      description: "James working on his album 'Echoes of Time'"
-    },
-    {
-      id: 2,
-      title: "Concert at Sunset",
-      category: "Live",
-      year: 2019,
-      description: "Live performance at the Summer Music Festival"
-    },
-    {
-      id: 3,
-      title: "Reflective Moment",
-      category: "Portraits",
-      year: 2021,
-      description: "A quiet moment of contemplation"
-    },
-    {
-      id: 4,
-      title: "Morning Light",
-      category: "Nature",
-      year: 2018,
-      description: "Inspired by the natural world around his studio"
-    },
-    {
-      id: 5,
-      title: "Creative Process",
-      category: "Studio",
-      year: 2022,
-      description: "Behind the scenes of music creation"
-    },
-    {
-      id: 6,
-      title: "Sound Waves",
-      category: "Abstract",
-      year: 2021,
-      description: "Visual representation of music"
-    },
-    {
-      id: 7,
-      title: "Garden Path",
-      category: "Nature",
-      year: 2019,
-      description: "The path where James often walked for inspiration"
-    },
-    {
-      id: 8,
-      title: "Final Portrait",
-      category: "Portraits",
-      year: 2023,
-      description: "One of the last professional portraits taken"
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  const fetchImages = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('gallery_images')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      setImages(data || []);
+      
+      // Extract unique categories
+      const uniqueCategories = [...new Set(data?.map(img => img.category).filter(Boolean))];
+      setCategories(['All', ...uniqueCategories]);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load gallery images",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Check if it's an image file
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file type",
+        description: "Please select an image file",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      // Upload file to storage
+      const fileName = `gallery/${Date.now()}-${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from('ReKaB')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      // Get basic metadata from filename
+      const title = file.name.replace(/\.[^/.]+$/, "");
+      
+      // Insert image metadata into database
+      const { error: dbError } = await supabase
+        .from('gallery_images')
+        .insert({
+          title,
+          category: "Uploaded",
+          year: new Date().getFullYear(),
+          description: "Uploaded image",
+          file_path: fileName,
+          file_size: file.size,
+        });
+
+      if (dbError) throw dbError;
+
+      toast({
+        title: "Success",
+        description: "Image uploaded successfully",
+      });
+
+      // Refresh images
+      fetchImages();
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload image",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+      // Reset file input
+      event.target.value = '';
+    }
+  };
+
+  const getImageUrl = (filePath: string) => {
+    const { data } = supabase.storage.from('ReKaB').getPublicUrl(filePath);
+    return data.publicUrl;
+  };
 
   const filteredImages = images.filter(image => 
     selectedCategory === "All" || image.category === selectedCategory
   );
 
-  const handleImageClick = (imageId: number) => {
+  const handleImageClick = (imageId: string) => {
     setSelectedImage(imageId);
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
   };
+
+  const selectedImageData = selectedImage ? images.find(img => img.id === selectedImage) : null;
 
   return (
     <div className="min-h-screen py-8">
@@ -102,7 +158,7 @@ const Gallery = () => {
             </p>
           </div>
 
-          {/* Category Filters */}
+          {/* Category Filters and Upload */}
           <div className="flex items-center justify-center gap-2 mb-8 flex-wrap">
             <Filter className="w-4 h-4 text-muted-foreground mr-2" />
             {categories.map((category) => (
@@ -116,89 +172,105 @@ const Gallery = () => {
                 {category}
               </Button>
             ))}
+            
+            {/* Upload Button */}
+            <div className="relative ml-2">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileUpload}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                disabled={uploading}
+              />
+              <Button variant="outline" size="sm" disabled={uploading}>
+                <Upload className="w-4 h-4 mr-1" />
+                {uploading ? "Uploading..." : "Upload"}
+              </Button>
+            </div>
           </div>
 
-          {/* Images Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredImages.map((image, index) => (
-              <motion.div
-                key={image.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <Card 
-                  className="card-gradient shadow-soft hover:shadow-golden transition-smooth cursor-pointer overflow-hidden group"
-                  onClick={() => handleImageClick(image.id)}
+          {/* Loading State */}
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading gallery images...</p>
+            </div>
+          ) : (
+            <>
+              {/* Images Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredImages.map((image, index) => (
+                  <motion.div
+                    key={image.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                  >
+                    <Card 
+                      className="card-gradient shadow-soft hover:shadow-golden transition-smooth cursor-pointer overflow-hidden group"
+                      onClick={() => handleImageClick(image.id)}
+                    >
+                      {/* Image */}
+                      <div className="aspect-square bg-muted relative overflow-hidden">
+                        {image.file_path ? (
+                          <img
+                            src={getImageUrl(image.file_path)}
+                            alt={image.title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <ImageIcon className="w-12 h-12 text-muted-foreground" />
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-gentle" />
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-gentle">
+                          <ZoomIn className="w-8 h-8 text-white" />
+                        </div>
+                      </div>
+
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <h3 className="font-medium text-primary text-sm line-clamp-1">
+                            {image.title}
+                          </h3>
+                          <Badge variant="secondary" className="bg-accent/10 text-accent text-xs">
+                            {image.category}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
+                          {image.description}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {image.year}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+
+              {filteredImages.length === 0 && !loading && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-12"
                 >
-                  {/* Image Placeholder */}
-                  <div className="aspect-square bg-muted relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <ImageIcon className="w-12 h-12 text-muted-foreground" />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-gentle" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-gentle">
-                      <ZoomIn className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
-
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="font-medium text-primary text-sm line-clamp-1">
-                        {image.title}
-                      </h3>
-                      <Badge variant="secondary" className="bg-accent/10 text-accent text-xs">
-                        {image.category}
-                      </Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
-                      {image.description}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {image.year}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {filteredImages.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-12"
-            >
-              <p className="text-muted-foreground text-lg">
-                No images found in this category.
-              </p>
-            </motion.div>
+                  <p className="text-muted-foreground text-lg">
+                    {images.length === 0 
+                      ? "No images uploaded yet. Use the upload button to add images."
+                      : "No images found in this category."
+                    }
+                  </p>
+                </motion.div>
+              )}
+            </>
           )}
-
-          {/* Note about Supabase integration */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-16 text-center"
-          >
-            <Card className="card-gradient shadow-soft max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="font-display text-xl font-semibold text-primary mb-3">
-                  Full Gallery Coming Soon
-                </h3>
-                <p className="text-muted-foreground">
-                  The complete image gallery with high-resolution photos will be available 
-                  once connected to Supabase, with secure storage and fast loading.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
         </motion.div>
       </div>
 
       {/* Lightbox Modal */}
-      {selectedImage && (
+      {selectedImage && selectedImageData && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -210,32 +282,36 @@ const Gallery = () => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="relative bg-white rounded-lg overflow-hidden max-w-4xl max-h-[90vh] w-full"
+            className="relative bg-background rounded-lg overflow-hidden max-w-4xl max-h-[90vh] w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="aspect-video bg-muted flex items-center justify-center">
-              <ImageIcon className="w-16 h-16 text-muted-foreground" />
+            {/* Full Size Image */}
+            <div className="max-h-[60vh] bg-muted flex items-center justify-center overflow-hidden">
+              {selectedImageData.file_path ? (
+                <img
+                  src={getImageUrl(selectedImageData.file_path)}
+                  alt={selectedImageData.title}
+                  className="max-w-full max-h-full object-contain"
+                />
+              ) : (
+                <ImageIcon className="w-16 h-16 text-muted-foreground" />
+              )}
             </div>
+            
+            {/* Image Details */}
             <div className="p-6">
-              {(() => {
-                const image = images.find(img => img.id === selectedImage);
-                return image ? (
-                  <>
-                    <h3 className="font-display text-xl font-semibold text-primary mb-2">
-                      {image.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-3">
-                      {image.description}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <span>{image.year}</span>
-                      <Badge variant="secondary" className="bg-accent/10 text-accent">
-                        {image.category}
-                      </Badge>
-                    </div>
-                  </>
-                ) : null;
-              })()}
+              <h3 className="font-display text-xl font-semibold text-primary mb-2">
+                {selectedImageData.title}
+              </h3>
+              <p className="text-muted-foreground mb-3">
+                {selectedImageData.description}
+              </p>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span>{selectedImageData.year}</span>
+                <Badge variant="secondary" className="bg-accent/10 text-accent">
+                  {selectedImageData.category}
+                </Badge>
+              </div>
             </div>
           </motion.div>
         </motion.div>
