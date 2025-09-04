@@ -160,6 +160,74 @@ const Music = () => {
             </p>
           </div>
 
+          {/* Bandcamp Albums Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12"
+          >
+            <h2 className="font-display text-2xl lg:text-3xl font-semibold text-primary mb-6 text-center">
+              Albums on Bandcamp
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Controlling Science */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '120px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=3046928857/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/album/controlling-science">Controlling Science by ReKaB</a>
+                </iframe>
+              </div>
+              
+              {/* My Reflections */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '120px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=915176512/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/album/my-reflections">My Reflections by ReKaB</a>
+                </iframe>
+              </div>
+
+              {/* Lost In Wires */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '120px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=2685651016/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/album/lost-in-wires">Lost In Wires by ReKaB</a>
+                </iframe>
+              </div>
+
+              {/* Subtle Beginnings */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '120px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=866950361/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/album/subtle-beginnings">Subtle Beginnings by ReKaB</a>
+                </iframe>
+              </div>
+
+              {/* Arimat - Blank Spaces (Single) */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '120px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/track=4119378994/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/track/arimat-blank-spaces">Arimat - Blank Spaces by ReKaB</a>
+                </iframe>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Search, Filters, and Upload */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
