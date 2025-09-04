@@ -19,13 +19,13 @@ const Navigation = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link 
             to="/" 
-            className="font-display text-xl font-bold text-primary hover:text-accent transition-gentle"
+            className="font-display text-xl font-bold text-foreground hover:text-accent transition-gentle"
           >
             James Baker
             <span className="text-accent ml-1 text-sm">(ReKaB)</span>
@@ -38,7 +38,11 @@ const Navigation = () => {
                 <Button
                   variant={isActive(href) ? "default" : "ghost"}
                   size="sm"
-                  className="transition-gentle"
+                  className={`transition-gentle ${
+                    isActive(href) 
+                      ? "bg-accent text-accent-foreground hover:bg-accent/90" 
+                      : "text-foreground hover:bg-accent/10 hover:text-accent"
+                  }`}
                 >
                   <Icon className="w-4 h-4 mr-2" />
                   {label}
@@ -51,7 +55,7 @@ const Navigation = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden"
+            className="md:hidden text-foreground hover:bg-accent/10 hover:text-accent"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -66,15 +70,19 @@ const Navigation = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden border-t border-border"
+              className="md:hidden overflow-hidden border-t border-border bg-card/50"
             >
               <div className="py-4 space-y-2">
                 {navItems.map(({ href, label, icon: Icon }) => (
                   <Link key={href} to={href} onClick={() => setIsOpen(false)}>
                     <Button
-                      variant={isActive(href) ? "default" : "ghost"}
+                      variant="ghost"
                       size="sm"
-                      className="w-full justify-start transition-gentle"
+                      className={`w-full justify-start transition-gentle ${
+                        isActive(href)
+                          ? "bg-accent text-accent-foreground"
+                          : "text-foreground hover:bg-accent/10 hover:text-accent"
+                      }`}
                     >
                       <Icon className="w-4 h-4 mr-2" />
                       {label}
