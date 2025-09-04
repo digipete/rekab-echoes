@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Image as ImageIcon, ZoomIn, Filter, Upload } from "lucide-react";
+import { Image as ImageIcon, ZoomIn, Filter } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRole } from "@/hooks/useUserRole";
+import { GalleryUploadForm } from "@/components/GalleryUploadForm";
 
 interface GalleryImage {
   id: string;
@@ -25,7 +26,6 @@ const Gallery = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
   const { isAdmin } = useUserRole();
@@ -60,67 +60,8 @@ const Gallery = () => {
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Check if it's an image file
-    if (!file.type.startsWith('image/')) {
-      toast({
-        title: "Invalid file type",
-        description: "Please select an image file",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setUploading(true);
-
-    try {
-      // Upload file to storage
-      const fileName = `gallery/${Date.now()}-${file.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from('ReKaB')
-        .upload(fileName, file);
-
-      if (uploadError) throw uploadError;
-
-      // Get basic metadata from filename
-      const title = file.name.replace(/\.[^/.]+$/, "");
-      
-      // Insert image metadata into database
-      const { error: dbError } = await supabase
-        .from('gallery_images')
-        .insert({
-          title,
-          category: "Uploaded",
-          year: new Date().getFullYear(),
-          description: "Uploaded image",
-          file_path: fileName,
-          file_size: file.size,
-        });
-
-      if (dbError) throw dbError;
-
-      toast({
-        title: "Success",
-        description: "Image uploaded successfully",
-      });
-
-      // Refresh images
-      fetchImages();
-    } catch (error) {
-      console.error('Upload error:', error);
-      toast({
-        title: "Upload failed",
-        description: "Failed to upload image",
-        variant: "destructive",
-      });
-    } finally {
-      setUploading(false);
-      // Reset file input
-      event.target.value = '';
-    }
+  const handleUploadSuccess = () => {
+    fetchImages();
   };
 
   const getImageUrl = (filePath: string) => {
@@ -179,18 +120,11 @@ const Gallery = () => {
             
             {/* Upload Button - Only show for admin users */}
             {user && isAdmin && (
-              <div className="relative ml-2">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  disabled={uploading}
+              <div className="ml-2">
+                <GalleryUploadForm 
+                  categories={categories} 
+                  onUploadSuccess={handleUploadSuccess}
                 />
-                <Button variant="outline" size="sm" disabled={uploading}>
-                  <Upload className="w-4 h-4 mr-1" />
-                  {uploading ? "Uploading..." : "Upload"}
-                </Button>
               </div>
             )}
           </div>
