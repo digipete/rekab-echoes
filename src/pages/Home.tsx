@@ -95,7 +95,7 @@ const Home = () => {
                     </Button>
                   </Link>
                   <Link to="/tributes">
-                    <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                    <Button size="lg" variant="outline" className="border-foreground/20 text-foreground bg-background/10 hover:bg-foreground hover:text-background backdrop-blur-sm">
                       <Heart className="w-5 h-5 mr-2" />
                       Share a Tribute
                     </Button>
