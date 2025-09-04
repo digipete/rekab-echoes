@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Music, Heart, Image as ImageIcon, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import jamesBakerPortrait from "@/assets/james-baker-portrait.jpg";
+const jamesBakerPortrait = "/lovable-uploads/7d4eee25-01e9-44a4-8c4b-89d42abf6449.png";
 
 const Home = () => {
   const fadeInUp = {
@@ -46,7 +46,7 @@ const Home = () => {
                   <img 
                     src={jamesBakerPortrait}
                     alt="James Baker (ReKaB) - Memorial Portrait"
-                    className="w-full max-w-md mx-auto rounded-2xl shadow-golden"
+                    className="w-full max-w-md mx-auto rounded-2xl shadow-electric"
                   />
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
