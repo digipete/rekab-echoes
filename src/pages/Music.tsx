@@ -208,7 +208,7 @@ const Music = () => {
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   style={{border: 0, width: '100%', height: '152px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/album=866950361/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=1644218658/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
                   <a href="https://rekab.bandcamp.com/album/subtle-beginnings">Subtle Beginnings by ReKaB</a>
