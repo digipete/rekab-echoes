@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Play, Pause, Search, Filter, Upload } from "lucide-react";
+import { Play, Pause, Search, Filter } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { useUserRole } from "@/hooks/useUserRole";
+import { MusicUploadForm } from "@/components/MusicUploadForm";
 
 interface Track {
   id: string;
@@ -42,10 +44,10 @@ const Music = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [genres, setGenres] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false);
   const [mixcloudTracks, setMixcloudTracks] = useState<MixcloudTrack[]>([]);
   const [mixcloudLoading, setMixcloudLoading] = useState(true);
   const { toast } = useToast();
+  const { isAdmin } = useUserRole();
 
   useEffect(() => {
     fetchTracks();
@@ -95,69 +97,6 @@ const Music = () => {
     }
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    // Check if it's an audio file
-    if (!file.type.startsWith('audio/')) {
-      toast({
-        title: "Invalid file type",
-        description: "Please select an audio file",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setUploading(true);
-
-    try {
-      // Upload file to storage
-      const fileName = `music/${Date.now()}-${file.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from('ReKaB')
-        .upload(fileName, file);
-
-      if (uploadError) throw uploadError;
-
-      // Get basic metadata from filename (you can enhance this)
-      const title = file.name.replace(/\.[^/.]+$/, "");
-      
-      // Insert track metadata into database
-      const { error: dbError } = await supabase
-        .from('music_tracks')
-        .insert({
-          title,
-          artist: "James Baker",
-          file_path: fileName,
-          file_size: file.size,
-          duration: "0:00", // You can implement audio duration detection
-          genre: "Uploaded",
-          description: "Uploaded track",
-        });
-
-      if (dbError) throw dbError;
-
-      toast({
-        title: "Success",
-        description: "Music track uploaded successfully",
-      });
-
-      // Refresh tracks
-      fetchTracks();
-    } catch (error) {
-      console.error('Upload error:', error);
-      toast({
-        title: "Upload failed",
-        description: "Failed to upload music track",
-        variant: "destructive",
-      });
-    } finally {
-      setUploading(false);
-      // Reset file input
-      event.target.value = '';
-    }
-  };
 
   const getAudioUrl = (filePath: string) => {
     const { data } = supabase.storage.from('ReKaB').getPublicUrl(filePath);
@@ -369,20 +308,13 @@ const Music = () => {
                 ))}
               </div>
               
-              {/* Upload Button */}
-              <div className="relative">
-                <input
-                  type="file"
-                  accept="audio/*"
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  disabled={uploading}
+              {/* Upload Button - Only for admin users */}
+              {isAdmin && (
+                <MusicUploadForm 
+                  genres={genres} 
+                  onUploadSuccess={fetchTracks}
                 />
-                <Button variant="outline" size="sm" disabled={uploading}>
-                  <Upload className="w-4 h-4 mr-1" />
-                  {uploading ? "Uploading..." : "Upload"}
-                </Button>
-              </div>
+              )}
             </div>
           </div>
 
