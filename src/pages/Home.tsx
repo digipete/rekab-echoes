@@ -1,13 +1,23 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Music, Heart, Image as ImageIcon, Calendar, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 const jamesBakerPortrait = "/lovable-uploads/7d4eee25-01e9-44a4-8c4b-89d42abf6449.png";
+
+interface GalleryImage {
+  id: string;
+  title: string;
+  file_path: string;
+}
 
 const Home = () => {
   const { user } = useAuth();
+  const [recentImages, setRecentImages] = useState<GalleryImage[]>([]);
+  const [loadingImages, setLoadingImages] = useState(true);
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
@@ -20,6 +30,32 @@ const Home = () => {
         staggerChildren: 0.1
       }
     }
+  };
+
+  useEffect(() => {
+    fetchRecentImages();
+  }, []);
+
+  const fetchRecentImages = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('gallery_images')
+        .select('id, title, file_path')
+        .order('created_at', { ascending: false })
+        .limit(4);
+
+      if (error) throw error;
+      setRecentImages(data || []);
+    } catch (error) {
+      console.error('Error fetching recent images:', error);
+    } finally {
+      setLoadingImages(false);
+    }
+  };
+
+  const getImageUrl = (filePath: string) => {
+    const { data } = supabase.storage.from('ReKaB').getPublicUrl(filePath);
+    return data.publicUrl;
   };
 
   const featuredTracks = [
@@ -190,14 +226,36 @@ const Home = () => {
                     </div>
                     
                     <div className="grid grid-cols-2 gap-3 mb-6">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div 
-                          key={i} 
-                          className="aspect-square bg-muted rounded-lg flex items-center justify-center"
-                        >
-                          <ImageIcon className="w-8 h-8 text-muted-foreground" />
-                        </div>
-                      ))}
+                      {loadingImages ? (
+                        [1, 2, 3, 4].map((i) => (
+                          <div 
+                            key={i} 
+                            className="aspect-square bg-muted rounded-lg animate-pulse"
+                          />
+                        ))
+                      ) : recentImages.length > 0 ? (
+                        recentImages.map((image) => (
+                          <div 
+                            key={image.id} 
+                            className="aspect-square bg-muted rounded-lg overflow-hidden"
+                          >
+                            <img
+                              src={getImageUrl(image.file_path)}
+                              alt={image.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))
+                      ) : (
+                        [1, 2, 3, 4].map((i) => (
+                          <div 
+                            key={i} 
+                            className="aspect-square bg-muted rounded-lg flex items-center justify-center"
+                          >
+                            <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                          </div>
+                        ))
+                      )}
                     </div>
 
                     <Link to="/gallery" className="block">
