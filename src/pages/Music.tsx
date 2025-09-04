@@ -371,17 +371,18 @@ const Music = () => {
                             </div>
                           </div>
                           
-                          {/* Audio Player */}
-                          {track.file_path && (
-                            <audio 
-                              controls 
-                              className="w-full"
-                              src={getAudioUrl(track.file_path)}
-                              preload="metadata"
-                            >
-                              Your browser does not support the audio element.
-                            </audio>
-                          )}
+                           {/* Audio Player */}
+                           {track.file_path && (
+                             <audio 
+                               controls 
+                               controlsList="nodownload"
+                               className="w-full"
+                               src={getAudioUrl(track.file_path)}
+                               preload="metadata"
+                             >
+                               Your browser does not support the audio element.
+                             </audio>
+                           )}
                         </div>
                       </CardContent>
                     </Card>
