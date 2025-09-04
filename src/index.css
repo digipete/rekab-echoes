@@ -17,45 +17,45 @@
 
 @layer base {
   :root {
-    /* Beatport-inspired dark electronic palette */
-    --background: 0 0% 98%; /* Light mode fallback */
-    --foreground: 0 0% 5%; /* Almost black text */
+    /* Beatport-inspired palette - works in both light and dark modes */
+    --background: 0 0% 98%; /* Light grey background */
+    --foreground: 0 0% 8%; /* Dark text */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
+    --card-foreground: 0 0% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 0 0% 5%; /* Deep black */
+    --primary: 0 0% 8%; /* Dark primary */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 90%; /* Light grey */
-    --secondary-foreground: 0 0% 5%;
+    --secondary-foreground: 0 0% 8%;
 
-    --muted: 0 0% 95%; /* Very light grey */
+    --muted: 0 0% 94%; /* Very light grey */
     --muted-foreground: 0 0% 45%;
 
-    --accent: 120 100% 50%; /* Electric green */
-    --accent-foreground: 0 0% 5%;
+    --accent: 120 100% 40%; /* Darker green for light mode */
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 88%;
     --input: 0 0% 90%;
-    --ring: 120 100% 50%; /* Electric green focus ring */
+    --ring: 120 100% 40%;
 
     --radius: 0.75rem;
 
     /* Beatport-specific tokens */
-    --beatport-green: 120 100% 50%;
-    --beatport-black: 0 0% 5%;
-    --beatport-purple: 270 100% 70%;
-    --beatport-pink: 330 100% 75%;
+    --beatport-green: 120 100% 40%;
+    --beatport-black: 0 0% 8%;
+    --beatport-purple: 270 100% 60%;
+    --beatport-pink: 330 100% 70%;
     
     /* Beatport gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 8%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 15%));
     --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 96%));
     --gradient-purple: linear-gradient(135deg, hsl(var(--beatport-purple)), hsl(var(--beatport-pink)));
     
@@ -86,44 +86,44 @@
   }
 
   .dark {
-    /* Beatport-inspired dark theme - true club aesthetic */
-    --background: 0 0% 3%; /* Deep black background */
-    --foreground: 0 0% 98%; /* Bright white text */
+    /* Beatport dark theme - true club aesthetic */
+    --background: 0 0% 8%; /* Dark background */
+    --foreground: 0 0% 95%; /* Light text */
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 0 0% 98%; /* White primary in dark */
-    --primary-foreground: 0 0% 3%;
+    --primary: 0 0% 95%; /* Light primary in dark */
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 0 0% 12%; /* Dark grey */
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 15%; /* Dark grey */
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 8%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 120 100% 50%; /* Electric green */
-    --accent-foreground: 0 0% 3%;
+    --accent: 120 100% 50%; /* Bright green */
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 65% 55%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 12%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
     --ring: 120 100% 50%;
 
     /* Beatport dark tokens */
     --beatport-green: 120 100% 50%;
-    --beatport-black: 0 0% 3%;
+    --beatport-black: 0 0% 8%;
     --beatport-purple: 270 100% 65%;
     --beatport-pink: 330 100% 70%;
     
     /* Dark Beatport gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 8%));
-    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 8%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--beatport-black)), hsl(0 0% 12%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 12%));
     --gradient-purple: linear-gradient(135deg, hsl(var(--beatport-purple)), hsl(var(--beatport-pink)));
     
     /* Dark Beatport shadows */

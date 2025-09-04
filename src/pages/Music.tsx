@@ -135,7 +135,7 @@ const Music = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
-                <Card className="card-gradient shadow-soft hover:shadow-golden transition-smooth">
+                <Card className="card-gradient shadow-soft hover:shadow-green transition-smooth">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-6">
                       {/* Play Button */}
