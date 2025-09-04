@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, User, Calendar } from "lucide-react";
+import { Heart, User, Calendar, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Tribute {
-  id: number;
+  id: string;
   name: string;
   message: string;
-  date: string;
+  created_at: string;
+  approved: boolean;
 }
 
 const Tributes = () => {
@@ -21,28 +24,55 @@ const Tributes = () => {
   });
   
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  // Sample tributes
-  const existingTributes: Tribute[] = [
-    {
-      id: 1,
-      name: "Sarah Mitchell",
-      message: "James's music carried me through the darkest times in my life. His piece 'Morning Reflections' was playing when I received some of the best news of my life. His art will forever be woven into my story.",
-      date: "March 15, 2024"
-    },
-    {
-      id: 2,
-      name: "Dr. Robert Chen",
-      message: "As a colleague in music therapy, I witnessed firsthand James's incredible ability to connect with patients through sound. His compassion and artistry created healing moments that words cannot capture.",
-      date: "March 12, 2024"
-    },
-    {
-      id: 3,
-      name: "Emily Rodriguez",
-      message: "I had the privilege of attending James's last live performance. The way he poured his soul into every note was breathtaking. Thank you for sharing your gift with the world, James. You are deeply missed.",
-      date: "March 10, 2024"
+  // Fetch approved tributes from Supabase
+  const { data: tributes, isLoading } = useQuery({
+    queryKey: ['tributes'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('tributes')
+        .select('*')
+        .eq('approved', true)
+        .order('created_at', { ascending: false });
+      
+      if (error) throw error;
+      return data;
     }
-  ];
+  });
+
+  // Submit tribute mutation
+  const submitTribute = useMutation({
+    mutationFn: async (tributeData: { name: string; message: string }) => {
+      const { data, error } = await supabase
+        .from('tributes')
+        .insert([{ 
+          name: tributeData.name, 
+          message: tributeData.message,
+          approved: false 
+        }])
+        .select();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Thank you for your tribute",
+        description: "Your message has been submitted and will be reviewed before being published.",
+      });
+      setFormData({ name: "", message: "" });
+      queryClient.invalidateQueries({ queryKey: ['tributes'] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error submitting tribute",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+      console.error('Error submitting tribute:', error);
+    }
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,17 +86,19 @@ const Tributes = () => {
       return;
     }
 
-    // In a real app, this would submit to Supabase
-    toast({
-      title: "Thank you for your tribute",
-      description: "Your message has been submitted and will be reviewed before being published.",
-    });
-
-    setFormData({ name: "", message: "" });
+    submitTribute.mutate(formData);
   };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
   };
 
   return (
@@ -117,6 +149,7 @@ const Tributes = () => {
                       onChange={(e) => handleInputChange("name", e.target.value)}
                       placeholder="Enter your name"
                       className="w-full"
+                      disabled={submitTribute.isPending}
                     />
                   </div>
 
@@ -130,15 +163,26 @@ const Tributes = () => {
                       onChange={(e) => handleInputChange("message", e.target.value)}
                       placeholder="Share your memories, how James's music touched your life, or a message for his family..."
                       className="w-full min-h-[120px] resize-y"
+                      disabled={submitTribute.isPending}
                     />
                   </div>
 
                   <Button 
                     type="submit" 
                     className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                    disabled={submitTribute.isPending}
                   >
-                    <Heart className="w-4 h-4 mr-2" />
-                    Share Tribute
+                    {submitTribute.isPending ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Heart className="w-4 h-4 mr-2" />
+                        Share Tribute
+                      </>
+                    )}
                   </Button>
                 </form>
 
@@ -159,62 +203,56 @@ const Tributes = () => {
               Messages from the Community
             </h2>
 
-            <div className="space-y-6">
-              {existingTributes.map((tribute, index) => (
-                <motion.div
-                  key={tribute.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
-                >
-                  <Card className="card-gradient shadow-soft">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
-                          <User className="w-5 h-5 text-accent" />
-                        </div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-3 mb-3">
-                            <h3 className="font-medium text-primary">
-                              {tribute.name}
-                            </h3>
-                            <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                              <Calendar className="w-3 h-3" />
-                              <span>{tribute.date}</span>
-                            </div>
+            {isLoading ? (
+              <div className="text-center py-8">
+                <Loader2 className="w-8 h-8 animate-spin mx-auto text-accent" />
+                <p className="text-muted-foreground mt-2">Loading tributes...</p>
+              </div>
+            ) : tributes && tributes.length > 0 ? (
+              <div className="space-y-6">
+                {tributes.map((tribute, index) => (
+                  <motion.div
+                    key={tribute.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 * index }}
+                  >
+                    <Card className="card-gradient shadow-soft">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="flex-shrink-0 w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                            <User className="w-5 h-5 text-accent" />
                           </div>
                           
-                          <p className="text-muted-foreground leading-relaxed">
-                            {tribute.message}
-                          </p>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-3 mb-3">
+                              <h3 className="font-medium text-primary">
+                                {tribute.name}
+                              </h3>
+                              <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                <Calendar className="w-3 h-3" />
+                                <span>{formatDate(tribute.created_at)}</span>
+                              </div>
+                            </div>
+                            
+                            <p className="text-muted-foreground leading-relaxed">
+                              {tribute.message}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Note about Supabase integration */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 text-center"
-            >
-              <Card className="card-gradient shadow-soft max-w-2xl mx-auto">
-                <CardContent className="p-6">
-                  <h3 className="font-display text-lg font-semibold text-primary mb-3">
-                    Tribute Moderation & Storage
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    Full tribute submission and moderation capabilities will be available 
-                    once connected to Supabase, allowing secure storage and management of all memorial messages.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Heart className="w-12 h-12 text-muted-foreground/50 mx-auto mb-4" />
+                <p className="text-muted-foreground">
+                  No tributes have been published yet. Be the first to share a memory.
+                </p>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       </div>
