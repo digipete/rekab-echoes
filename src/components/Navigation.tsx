@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Music, Image, Heart, User, Home } from "lucide-react";
+import { Menu, X, Music, Image, Heart, User, Home, LogIn, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut, loading } = useAuth();
 
   const navItems = [
     { href: "/", label: "Home", icon: Home },
@@ -49,6 +51,32 @@ const Navigation = () => {
                 </Button>
               </Link>
             ))}
+            
+            {/* Auth Button */}
+            {!loading && (
+              user ? (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={signOut}
+                  className="text-foreground hover:bg-accent/10 hover:text-accent"
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              ) : (
+                <Link to="/auth">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-foreground hover:bg-accent/10 hover:text-accent"
+                  >
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Sign In
+                  </Button>
+                </Link>
+              )
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,6 +117,35 @@ const Navigation = () => {
                     </Button>
                   </Link>
                 ))}
+                
+                {/* Mobile Auth Button */}
+                {!loading && (
+                  user ? (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        signOut();
+                        setIsOpen(false);
+                      }}
+                      className="w-full justify-start text-foreground hover:bg-accent/10 hover:text-accent"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  ) : (
+                    <Link to="/auth" onClick={() => setIsOpen(false)}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="w-full justify-start text-foreground hover:bg-accent/10 hover:text-accent"
+                      >
+                        <LogIn className="w-4 h-4 mr-2" />
+                        Sign In
+                      </Button>
+                    </Link>
+                  )
+                )}
               </div>
             </motion.div>
           )}

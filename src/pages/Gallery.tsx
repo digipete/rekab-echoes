@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Image as ImageIcon, ZoomIn, Filter, Upload } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 interface GalleryImage {
   id: string;
@@ -25,6 +26,7 @@ const Gallery = () => {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchImages();
@@ -173,20 +175,22 @@ const Gallery = () => {
               </Button>
             ))}
             
-            {/* Upload Button */}
-            <div className="relative ml-2">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileUpload}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                disabled={uploading}
-              />
-              <Button variant="outline" size="sm" disabled={uploading}>
-                <Upload className="w-4 h-4 mr-1" />
-                {uploading ? "Uploading..." : "Upload"}
-              </Button>
-            </div>
+            {/* Upload Button - Only show for authenticated users */}
+            {user && (
+              <div className="relative ml-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  disabled={uploading}
+                />
+                <Button variant="outline" size="sm" disabled={uploading}>
+                  <Upload className="w-4 h-4 mr-1" />
+                  {uploading ? "Uploading..." : "Upload"}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Loading State */}
@@ -258,7 +262,9 @@ const Gallery = () => {
                 >
                   <p className="text-muted-foreground text-lg">
                     {images.length === 0 
-                      ? "No images uploaded yet. Use the upload button to add images."
+                      ? user 
+                        ? "No images uploaded yet. Use the upload button to add images."
+                        : "No images uploaded yet. Sign in to upload images."
                       : "No images found in this category."
                     }
                   </p>

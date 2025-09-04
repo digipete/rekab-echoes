@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Music, Heart, Image as ImageIcon, Calendar } from "lucide-react";
+import { Music, Heart, Image as ImageIcon, Calendar, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 const jamesBakerPortrait = "/lovable-uploads/7d4eee25-01e9-44a4-8c4b-89d42abf6449.png";
 
 const Home = () => {
+  const { user } = useAuth();
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
@@ -99,6 +101,14 @@ const Home = () => {
                       Visit Bandcamp
                     </Button>
                   </a>
+                  {!user && (
+                    <Link to="/auth">
+                      <Button size="lg" variant="outline" className="border-foreground/20 text-foreground bg-background/10 hover:bg-foreground hover:text-background backdrop-blur-sm">
+                        <LogIn className="w-5 h-5 mr-2" />
+                        Sign In
+                      </Button>
+                    </Link>
+                  )}
                 </motion.div>
               </motion.div>
             </div>
