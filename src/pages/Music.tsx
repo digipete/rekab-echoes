@@ -219,10 +219,10 @@ const Music = () => {
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   style={{border: 0, width: '100%', height: '152px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/track=4119378994/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
+                  src="https://bandcamp.com/EmbeddedPlayer/track=2699833906/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
-                  <a href="https://rekab.bandcamp.com/track/arimat-blank-spaces">Arimat - Blank Spaces by ReKaB</a>
+                  <a href="https://rekab.bandcamp.com/track/arimat-blank-spaces">Arimat - Blank Spaces by Arimat</a>
                 </iframe>
               </div>
             </div>
