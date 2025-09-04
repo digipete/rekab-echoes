@@ -20,6 +20,21 @@ interface Track {
   file_size: number;
 }
 
+interface MixcloudTrack {
+  key: string;
+  url: string;
+  name: string;
+  tags: Array<{ name: string }>;
+  created_time: string;
+  play_count: number;
+  pictures: {
+    medium: string;
+  };
+  user: {
+    name: string;
+  };
+}
+
 const Music = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
@@ -28,11 +43,31 @@ const Music = () => {
   const [genres, setGenres] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [mixcloudTracks, setMixcloudTracks] = useState<MixcloudTrack[]>([]);
+  const [mixcloudLoading, setMixcloudLoading] = useState(true);
   const { toast } = useToast();
 
   useEffect(() => {
     fetchTracks();
+    fetchMixcloudTracks();
   }, []);
+
+  const fetchMixcloudTracks = async () => {
+    try {
+      const response = await fetch('https://api.mixcloud.com/jazzybaker/cloudcasts/?limit=50');
+      const data = await response.json();
+      setMixcloudTracks(data.data || []);
+    } catch (error) {
+      console.error('Error fetching Mixcloud tracks:', error);
+      toast({
+        title: "Warning",
+        description: "Could not load Mixcloud tracks",
+        variant: "destructive",
+      });
+    } finally {
+      setMixcloudLoading(false);
+    }
+  };
 
   const fetchTracks = async () => {
     try {
@@ -238,31 +273,58 @@ const Music = () => {
             <h2 className="font-display text-2xl lg:text-3xl font-semibold text-primary mb-6 text-center">
               Music on Mixcloud
             </h2>
-            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Mixcloud Embeds */}
-              <div className="bg-card rounded-lg overflow-hidden shadow-soft p-4">
-                <iframe 
-                  width="100%" 
-                  height="180" 
-                  src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fjazzybaker%2F" 
-                  frameBorder="0"
-                  title="Jazzy Baker Mixcloud Profile"
-                >
-                </iframe>
+            
+            {mixcloudLoading ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">Loading Mixcloud tracks...</p>
               </div>
-              
-              {/* Recent Mixes Widget */}
-              <div className="bg-card rounded-lg overflow-hidden shadow-soft p-4">
-                <iframe 
-                  width="100%" 
-                  height="180" 
-                  src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&light=1&feed=%2Fjazzybaker%2F" 
-                  frameBorder="0"
-                  title="Jazzy Baker Recent Mixes"
-                >
-                </iframe>
+            ) : mixcloudTracks.length > 0 ? (
+              <div className="grid gap-6">
+                {mixcloudTracks.map((track, index) => (
+                  <motion.div
+                    key={track.key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="bg-card rounded-lg overflow-hidden shadow-soft"
+                  >
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-display text-lg font-semibold text-primary mb-2 truncate">
+                            {track.name}
+                          </h3>
+                          <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
+                            <span>{new Date(track.created_time).getFullYear()}</span>
+                            <span>•</span>
+                            <span>{track.play_count} plays</span>
+                            {track.tags.length > 0 && (
+                              <>
+                                <span>•</span>
+                                <span>{track.tags[0].name}</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <iframe
+                        width="100%"
+                        height="120"
+                        src={`https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=${encodeURIComponent(track.key)}`}
+                        frameBorder="0"
+                        title={track.name}
+                        className="rounded"
+                      />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-            </div>
+            ) : (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No Mixcloud tracks found</p>
+              </div>
+            )}
+            
             <div className="text-center mt-6">
               <a 
                 href="https://www.mixcloud.com/jazzybaker/" 
@@ -272,7 +334,7 @@ const Music = () => {
               >
                 View Full Profile on Mixcloud
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
             </div>
