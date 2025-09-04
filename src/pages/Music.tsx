@@ -174,41 +174,41 @@ const Music = () => {
               {/* Controlling Science */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
-                  style={{border: 0, width: '100%', height: '120px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/album=3046928857/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  style={{border: 0, width: '100%', height: '152px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=3046928857/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
                   <a href="https://rekab.bandcamp.com/album/controlling-science">Controlling Science by ReKaB</a>
                 </iframe>
               </div>
               
-              {/* My Reflections */}
-              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
-                <iframe 
-                  style={{border: 0, width: '100%', height: '120px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/album=915176512/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
-                  seamless
-                >
-                  <a href="https://rekab.bandcamp.com/album/my-reflections">My Reflections by ReKaB</a>
-                </iframe>
-              </div>
-
               {/* Lost In Wires */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
-                  style={{border: 0, width: '100%', height: '120px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/album=2685651016/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  style={{border: 0, width: '100%', height: '152px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=2685651016/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
                   <a href="https://rekab.bandcamp.com/album/lost-in-wires">Lost In Wires by ReKaB</a>
                 </iframe>
               </div>
 
+              {/* My Reflections */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  style={{border: 0, width: '100%', height: '152px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=915176512/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
+                  seamless
+                >
+                  <a href="https://rekab.bandcamp.com/album/my-reflections">My Reflections by ReKaB</a>
+                </iframe>
+              </div>
+
               {/* Subtle Beginnings */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
-                  style={{border: 0, width: '100%', height: '120px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/album=866950361/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  style={{border: 0, width: '100%', height: '152px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/album=866950361/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
                   <a href="https://rekab.bandcamp.com/album/subtle-beginnings">Subtle Beginnings by ReKaB</a>
@@ -218,8 +218,8 @@ const Music = () => {
               {/* Arimat - Blank Spaces (Single) */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
-                  style={{border: 0, width: '100%', height: '120px'}} 
-                  src="https://bandcamp.com/EmbeddedPlayer/track=4119378994/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" 
+                  style={{border: 0, width: '100%', height: '152px'}} 
+                  src="https://bandcamp.com/EmbeddedPlayer/track=4119378994/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/" 
                   seamless
                 >
                   <a href="https://rekab.bandcamp.com/track/arimat-blank-spaces">Arimat - Blank Spaces by ReKaB</a>
