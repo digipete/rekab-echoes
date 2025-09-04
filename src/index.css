@@ -1,42 +1,69 @@
+@import url('@fontsource/playfair-display/400.css');
+@import url('@fontsource/playfair-display/700.css');
+@import url('@fontsource/inter/400.css');
+@import url('@fontsource/inter/500.css');
+@import url('@fontsource/inter/600.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Memorial Site Design System for James Baker (ReKaB)
+   Palette: Deep navy, soft cream, gold accent, slate grey
+   Typography: Playfair Display (headings), Inter (body)
+   All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Memorial color palette - warm, reflective, elegant */
+    --background: 42 15% 96%; /* Soft cream */
+    --foreground: 215 25% 15%; /* Deep navy */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 42 20% 98%;
+    --card-foreground: 215 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 42 20% 98%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 215 35% 20%; /* Deep navy primary */
+    --primary-foreground: 42 15% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 15% 85%; /* Soft slate */
+    --secondary-foreground: 215 25% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 10% 90%; /* Light slate grey */
+    --muted-foreground: 215 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 85% 60%; /* Gold accent */
+    --accent-foreground: 215 25% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 42 15% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 88%;
+    --input: 210 20% 90%;
+    --ring: 45 85% 60%; /* Gold focus ring */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Memorial-specific tokens */
+    --memorial-gold: 45 85% 60%;
+    --memorial-navy: 215 35% 20%;
+    --memorial-cream: 42 15% 96%;
+    --memorial-slate: 210 10% 55%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--memorial-navy)), hsl(215 25% 25%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(42 25% 94%));
+    
+    /* Shadows */
+    --shadow-soft: 0 2px 20px -5px hsl(215 25% 15% / 0.1);
+    --shadow-golden: 0 4px 25px -8px hsl(var(--memorial-gold) / 0.3);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.2s ease-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +83,44 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode memorial theme - deeper, warmer tones */
+    --background: 215 20% 8%; /* Deep navy background */
+    --foreground: 42 15% 92%; /* Warm cream text */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 215 18% 10%;
+    --card-foreground: 42 15% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 18% 10%;
+    --popover-foreground: 42 15% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 42 15% 92%; /* Cream primary in dark */
+    --primary-foreground: 215 25% 15%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 215 15% 15%; /* Darker navy */
+    --secondary-foreground: 42 15% 92%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 12% 18%;
+    --muted-foreground: 210 8% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 85% 55%; /* Slightly darker gold */
+    --accent-foreground: 215 25% 15%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 42 15% 92%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 215 12% 18%;
+    --input: 215 12% 18%;
+    --ring: 45 85% 55%;
+
+    /* Memorial dark tokens */
+    --memorial-gold: 45 85% 55%;
+    --memorial-navy: 215 20% 8%;
+    --memorial-cream: 42 15% 92%;
+    --memorial-slate: 210 8% 65%;
+    
+    /* Dark gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--memorial-navy)), hsl(215 25% 12%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(215 20% 12%));
   }
 }
 
@@ -100,6 +130,55 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  /* Memorial typography system */
+  .font-display {
+    font-family: 'Playfair Display', serif;
+    font-feature-settings: "liga" 1, "kern" 1, "swsh" 1;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "liga" 1, "kern" 1, "tnum" 1;
+  }
+
+  /* Smooth scrolling for memorial experience */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Memorial-specific component styles */
+  .memorial-gradient {
+    background: var(--gradient-hero);
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-golden {
+    box-shadow: var(--shadow-golden);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-gentle {
+    transition: var(--transition-gentle);
   }
 }
