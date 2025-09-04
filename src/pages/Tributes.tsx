@@ -44,6 +44,12 @@ const Tributes = () => {
   // Submit tribute mutation
   const submitTribute = useMutation({
     mutationFn: async (tributeData: { name: string; message: string }) => {
+      console.log('Attempting to insert tribute:', { 
+        name: tributeData.name, 
+        message: tributeData.message,
+        approved: false 
+      });
+      
       const { data, error } = await supabase
         .from('tributes')
         .insert([{ 
@@ -52,6 +58,8 @@ const Tributes = () => {
           approved: false 
         }])
         .select();
+      
+      console.log('Insert result:', { data, error });
       
       if (error) throw error;
       return data;
