@@ -56,11 +56,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				memorial: {
-					gold: 'hsl(var(--memorial-gold))',
-					navy: 'hsl(var(--memorial-navy))',
-					cream: 'hsl(var(--memorial-cream))',
-					slate: 'hsl(var(--memorial-slate))'
+				industrial: {
+					blue: 'hsl(var(--industrial-blue))',
+					dark: 'hsl(var(--industrial-dark))',
+					steel: 'hsl(var(--industrial-steel))',
+					concrete: 'hsl(var(--industrial-concrete))'
 				}
 			},
 			borderRadius: {
