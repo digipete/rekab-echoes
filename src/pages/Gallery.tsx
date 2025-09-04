@@ -41,7 +41,16 @@ const Gallery = () => {
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        // Handle authentication errors gracefully
+        if (error.code === 'PGRST301' || error.message.includes('JWT') || error.message.includes('authentication')) {
+          console.log('Authentication required to view gallery');
+          setImages([]);
+          setCategories(['All']);
+          return;
+        }
+        throw error;
+      }
 
       setImages(data || []);
       
@@ -52,7 +61,7 @@ const Gallery = () => {
       console.error('Error fetching images:', error);
       toast({
         title: "Error",
-        description: "Failed to load gallery images",
+        description: user ? "Failed to load gallery images" : "Please sign in to view the gallery",
         variant: "destructive",
       });
     } finally {
@@ -200,7 +209,7 @@ const Gallery = () => {
                     {images.length === 0 
                       ? user 
                         ? "No images uploaded yet. Use the upload button to add images."
-                        : "No images uploaded yet. Sign in to upload images."
+                        : "Please sign in to view the gallery. This content requires authentication."
                       : "No images found in this category."
                     }
                   </p>
