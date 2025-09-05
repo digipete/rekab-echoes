@@ -199,6 +199,12 @@ const Music = () => {
                   <a href="https://rekab.bandcamp.com/track/arimat-blank-spaces">Arimat - Blank Spaces by Arimat</a>
                 </iframe>
               </div>
+
+               {/* Darren NYE - Tribute */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe style="border: 0; width: 100%; height: 120px;" src="https://bandcamp.com/EmbeddedPlayer/track=3359675634/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/" seamless><a href="https://spacetime.bandcamp.com/track/a-tribute-to-james-baker">A Tribute To James Baker by Darren Nye</a></iframe>
+              </div>
+              
             </div>
           </motion.div>
 
