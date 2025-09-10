@@ -302,7 +302,6 @@ const Music = () => {
               Music from SoundCloud
             </h2>
             <div className="grid sm:grid-cols-2 gap-6">
-              {/* Space Race V2 */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   width="100%" 
@@ -314,7 +313,6 @@ const Music = () => {
                 />
               </div>
 
-              {/* Another track - using a different track ID */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   width="100%" 
@@ -322,11 +320,10 @@ const Music = () => {
                   scrolling="no" 
                   frameBorder="no" 
                   allow="autoplay" 
-                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/218847654&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/183728492&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
                 />
               </div>
 
-              {/* Third track */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   width="100%" 
@@ -334,11 +331,10 @@ const Music = () => {
                   scrolling="no" 
                   frameBorder="no" 
                   allow="autoplay" 
-                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/156789012&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/178550101&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
                 />
               </div>
 
-              {/* Fourth track */}
               <div className="bg-card rounded-lg overflow-hidden shadow-soft">
                 <iframe 
                   width="100%" 
@@ -346,7 +342,150 @@ const Music = () => {
                   scrolling="no" 
                   frameBorder="no" 
                   allow="autoplay" 
-                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/201234567&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/139246587&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135318876&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135314900&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135314091&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135313157&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/135311880&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/119975970&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/112646259&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/83115079&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/82189086&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/81617935&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/78287134&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/78279101&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/74004832&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
                 />
               </div>
             </div>
