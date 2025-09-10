@@ -214,6 +214,168 @@ const Music = () => {
             </div>
           </motion.div>
 
+          {/* More from Bandcamp Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-12"
+          >
+            <h2 className="font-display text-2xl lg:text-3xl font-semibold text-primary mb-8 text-center">
+              More from Bandcamp
+            </h2>
+            
+            {/* Diverse Pathways */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                Diverse Pathways by ReKaB (Plus Remixers)
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2812808196/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=3347684951/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1048715701/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2459647598/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=150080308/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=861887262/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2697467178/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1620873354/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2055736489/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=833577520/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=3182348747/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1674856349/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1442762289/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=198207606/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2661446757/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2970564903/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=177863259/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1985220638/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2789871082/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=1025150245/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2438356727/size=small/bgcol=ffffff/linkcol=0687f5/track=2477031130/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* M.R.E. / ReKaB - Ace High EP */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                M.R.E. / ReKaB - Ace High EP
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=627872773/size=small/bgcol=ffffff/linkcol=0687f5/track=1306216530/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=627872773/size=small/bgcol=ffffff/linkcol=0687f5/track=2800572508/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=627872773/size=small/bgcol=ffffff/linkcol=0687f5/track=437747276/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=627872773/size=small/bgcol=ffffff/linkcol=0687f5/track=4227862223/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* ReKaB - Total Control EP + Sound Synthesis */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                ReKaB - Total Control EP + Sound Synthesis
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2236861982/size=small/bgcol=ffffff/linkcol=0687f5/track=3531695183/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2236861982/size=small/bgcol=ffffff/linkcol=0687f5/track=3592206257/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2236861982/size=small/bgcol=ffffff/linkcol=0687f5/track=2290062082/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2236861982/size=small/bgcol=ffffff/linkcol=0687f5/track=2545565275/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2236861982/size=small/bgcol=ffffff/linkcol=0687f5/track=1772525092/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* ReKaB, Convextion - Concept */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                ReKaB, Convextion - Concept
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1873700697/size=small/bgcol=ffffff/linkcol=0687f5/track=3644212815/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1873700697/size=small/bgcol=ffffff/linkcol=0687f5/track=1345109113/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1873700697/size=small/bgcol=ffffff/linkcol=0687f5/track=1862874527/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1873700697/size=small/bgcol=ffffff/linkcol=0687f5/track=3109683055/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* Brexit Jazz (ReKaB Remix) */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                Brexit Jazz (ReKaB Remix)
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1323583013/size=small/bgcol=ffffff/linkcol=0687f5/track=1993226675/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Mixcloud Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
