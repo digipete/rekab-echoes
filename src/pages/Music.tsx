@@ -823,14 +823,6 @@ const Music = () => {
                 </div>
               </div>
               
-              <div className="bg-muted/30 rounded-lg p-4 mb-4">
-                <iframe 
-                  src="https://www.discogs.com/search/?q=rekab+2&layout=med"
-                  className="w-full h-96 rounded-lg border-0"
-                  title="Discogs ReKaB Search"
-                  loading="lazy"
-                />
-              </div>
               
               <div className="flex justify-center">
                 <a
