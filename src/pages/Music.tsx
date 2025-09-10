@@ -795,6 +795,59 @@ const Music = () => {
             </>
           )}
         </motion.div>
+
+        {/* Discogs Collection Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mb-12"
+        >
+          <h2 className="font-display text-2xl lg:text-3xl font-semibold text-primary mb-8 text-center">
+            Discogs Collection
+          </h2>
+          
+          <div className="bg-card rounded-xl overflow-hidden shadow-soft border">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-primary mb-2">
+                    ReKaB on Discogs
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Explore vinyl releases and collector items
+                  </p>
+                </div>
+                <div className="text-4xl">
+                  🎵
+                </div>
+              </div>
+              
+              <div className="bg-muted/30 rounded-lg p-4 mb-4">
+                <iframe 
+                  src="https://www.discogs.com/search/?q=rekab+2&layout=med"
+                  className="w-full h-96 rounded-lg border-0"
+                  title="Discogs ReKaB Search"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-top-navigation"
+                />
+              </div>
+              
+              <div className="flex justify-center">
+                <a
+                  href="https://www.discogs.com/search/?q=rekab+2&layout=med"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                >
+                  <span>View Full Collection</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
