@@ -291,6 +291,81 @@ const Music = () => {
             </div>
           </motion.div>
 
+          {/* SoundCloud Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mb-12"
+          >
+            <h2 className="font-display text-2xl lg:text-3xl font-semibold text-primary mb-6 text-center">
+              Music from SoundCloud
+            </h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {/* Space Race V2 */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/184161115&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              {/* Another track - using a different track ID */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/218847654&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              {/* Third track */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/156789012&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+
+              {/* Fourth track */}
+              <div className="bg-card rounded-lg overflow-hidden shadow-soft">
+                <iframe 
+                  width="100%" 
+                  height="300" 
+                  scrolling="no" 
+                  frameBorder="no" 
+                  allow="autoplay" 
+                  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/201234567&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+                />
+              </div>
+            </div>
+            
+            <div className="text-center mt-6">
+              <a 
+                href="https://soundcloud.com/rekab" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary-foreground transition-colors"
+              >
+                View Full Profile on SoundCloud
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </motion.div>
+
           {/* Search, Filters, and Upload */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
