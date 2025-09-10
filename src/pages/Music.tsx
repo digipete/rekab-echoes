@@ -808,34 +808,28 @@ const Music = () => {
           </h2>
           
           <div className="bg-card rounded-xl overflow-hidden shadow-soft border">
-            <div className="p-8">
-              <div className="text-center mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-10 h-10 text-primary-foreground" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-primary mb-2">
+                    ReKaB on Discogs
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Explore vinyl releases and collector items
+                  </p>
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-primary mb-2">
-                  ReKaB Vinyl Collection
-                </h3>
-                <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                  Discover rare vinyl releases, limited editions, and collector items from ReKaB's discography available on Discogs marketplace.
-                </p>
+                <div className="text-4xl">
+                  🎵
+                </div>
               </div>
-
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="text-center p-4 bg-muted/30 rounded-lg">
-                  <div className="text-2xl font-bold text-primary mb-1">12"</div>
-                  <div className="text-sm text-muted-foreground">Vinyl Singles</div>
-                </div>
-                <div className="text-center p-4 bg-muted/30 rounded-lg">
-                  <div className="text-2xl font-bold text-primary mb-1">EP</div>
-                  <div className="text-sm text-muted-foreground">Extended Plays</div>
-                </div>
-                <div className="text-center p-4 bg-muted/30 rounded-lg">
-                  <div className="text-2xl font-bold text-primary mb-1">LP</div>
-                  <div className="text-sm text-muted-foreground">Full Albums</div>
-                </div>
+              
+              <div className="bg-muted/30 rounded-lg p-4 mb-4">
+                <iframe 
+                  src="https://www.discogs.com/search/?q=rekab+2&layout=med"
+                  className="w-full h-96 rounded-lg border-0"
+                  title="Discogs ReKaB Search"
+                  loading="lazy"
+                />
               </div>
               
               <div className="flex justify-center">
@@ -843,12 +837,9 @@ const Music = () => {
                   href="https://www.discogs.com/search/?q=rekab+2&layout=med"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-medium hover:bg-primary/90 transition-all duration-200 hover:shadow-lg hover:scale-105"
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                  </svg>
-                  <span>Browse Collection on Discogs</span>
+                  <span>View Full Collection</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
