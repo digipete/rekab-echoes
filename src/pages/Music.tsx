@@ -374,6 +374,90 @@ const Music = () => {
                 </div>
               </div>
             </div>
+
+            {/* CYBORG ROMANCE */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                CYBORG ROMANCE
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=3787515070/size=small/bgcol=ffffff/linkcol=0687f5/track=3737465680/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=3787515070/size=small/bgcol=ffffff/linkcol=0687f5/track=1016274559/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=3787515070/size=small/bgcol=ffffff/linkcol=0687f5/track=2687912041/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=3787515070/size=small/bgcol=ffffff/linkcol=0687f5/track=850265248/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* ReKaB - Random Fragments EP */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                ReKaB - Random Fragments EP
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=509740485/size=small/bgcol=ffffff/linkcol=0687f5/track=167876617/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=509740485/size=small/bgcol=ffffff/linkcol=0687f5/track=1742410753/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=509740485/size=small/bgcol=ffffff/linkcol=0687f5/track=238656552/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=509740485/size=small/bgcol=ffffff/linkcol=0687f5/track=3036306421/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* My Future and my Past EP */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                My Future and my Past EP
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1201856121/size=small/bgcol=ffffff/linkcol=0687f5/track=929904011/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1201856121/size=small/bgcol=ffffff/linkcol=0687f5/track=2710473711/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1201856121/size=small/bgcol=ffffff/linkcol=0687f5/track=1950718977/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=1201856121/size=small/bgcol=ffffff/linkcol=0687f5/track=87434811/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
+
+            {/* What Is Our Future? */}
+            <div className="mb-8">
+              <h3 className="font-display text-xl font-semibold text-primary mb-4">
+                What Is Our Future?
+              </h3>
+              <div className="grid gap-2">
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2032005253/size=small/bgcol=ffffff/linkcol=0687f5/track=251719471/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2032005253/size=small/bgcol=ffffff/linkcol=0687f5/track=626698028/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2032005253/size=small/bgcol=ffffff/linkcol=0687f5/track=3876729723/transparent=true/" seamless></iframe>
+                </div>
+                <div className="bg-card rounded-lg overflow-hidden shadow-soft p-2">
+                  <iframe style={{border: 0, width: '100%', height: '42px'}} src="https://bandcamp.com/EmbeddedPlayer/album=2032005253/size=small/bgcol=ffffff/linkcol=0687f5/track=4189014033/transparent=true/" seamless></iframe>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           {/* Mixcloud Section */}
